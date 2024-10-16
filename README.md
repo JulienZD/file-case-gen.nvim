@@ -4,6 +4,7 @@
 ### Features
 
 - Insert a cased version of the current filename at the cursor
+- Specify overrides based on file patterns
 
 ### Why?
 
@@ -17,10 +18,40 @@
 ```lua
 {
   "JulienZD/file-case-gen.nvim",
+  opts = {}, 
+}
+```
+
+### Configuration
+
+The following configuration options are available:
+
+- `default_case`: The default case to use when no override is specified. Options are `'camelCase'`, `'PascalCase'`, and `'snake_case'`
+- `file_overrides`: A table of overrides for specific files. The key is the filename, and the value is the case to use. Options are `'camelCase'`, `'PascalCase'`, and `'snake_case'`
+
+#### Default configuration
+
+```lua
+{
+  default_case = 'camelCase',
+  file_overrides = {},
+}
+```
+
+#### Example configuration
+
+```lua
+{
+  "JulienZD/file-case-gen.nvim",
+  opts = {
+    default_case = 'camelCase',
+    file_overrides = {
+      ['%.controller%.ts$'] = 'PascalCase', -- Use PascalCase for TypeScript files ending with 'controller'
+    },
+  },
   keys = {
-    -- stylua: ignore
-    -- Other options are 'pascal' and 'snake'
-    { '<C-]>', mode = 'i', function() require('file-case-gen').insert_file_name_as 'camel' end, },
+    { '<C-]>', mode = 'i', function() require('file-case-gen').insert_cased_file_name() end, },
   },
 }
 ```
+

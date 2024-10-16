@@ -25,13 +25,13 @@ function M.snake_case(str)
 end
 
 -- @param str string
--- @param case 'camel' | 'snake' | 'pascal'
+-- @param case 'camelCase' | 'snake_case' | 'PascalCase'
 function M.to_case(str, case)
-  if case == 'camel' then
+  if case == 'camelCase' then
     return M.camel_case(str)
-  elseif case == 'snake' then
+  elseif case == 'snake_case' then
     return M.snake_case(str)
-  elseif case == 'pascal' then
+  elseif case == 'PascalCase' then
     return M.pascal_case(str)
   end
 end
